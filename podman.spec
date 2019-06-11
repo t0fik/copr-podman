@@ -84,8 +84,6 @@ Requires: runc >= 1.0.0-57
 Requires: %{name}-manpages = %{epoch}:%{version}-%{release}
 Requires: container-selinux
 Requires: slirp4netns >= 0.3-0
-Requires: libnftnl.so.7
-Requires: libostree-1.so.1
 %endif #fedora
 
 
