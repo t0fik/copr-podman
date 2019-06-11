@@ -81,7 +81,7 @@ Recommends: slirp4netns >= 0.3-0
 Recommends: fuse-overlayfs >= 0.3-8
 %else
 Requires: runc >= 1.0.0-57
-Requires: %{name}-manpages = %{epoch}:%{version}-%{release}
+Requires: %{name}-manpages = %{version}-%{release}
 Requires: container-selinux
 Requires: slirp4netns >= 0.3-0
 %endif #fedora
@@ -200,7 +200,11 @@ Provides: bundled(golang(k8s.io/utils)) = 258e2a2fa64568210fbd6267cf1d8fd87c3cb8
 %package docker
 Summary: Emulate Docker CLI using %{name}
 BuildArch: noarch
+%if 0%{?fedora}
 Requires: %{name} = %{epoch}:%{version}-%{release}
+%else
+Requires: %{name} = %{version}-%{release}
+%endif
 Conflicts: docker
 Conflicts: docker-latest
 Conflicts: docker-ce
@@ -239,7 +243,11 @@ connections as well.
 %package devel
 Summary: Library for applications looking to use Container Pods
 BuildArch: noarch
+%if 0%{?fedora}
 Provides: %{repo}-devel = %{epoch}:%{version}-%{release}
+%else
+Provides: %{repo}-devel = %{version}-%{release}
+%endif
 
 %if 0%{?with_check} && ! 0%{?with_bundled}
 BuildRequires: golang(github.com/BurntSushi/toml)
@@ -347,6 +355,7 @@ Requires: golang(k8s.io/apimachinery/pkg/util/wait)
 Requires: golang(k8s.io/client-go/tools/remotecommand)
 Requires: golang(k8s.io/kubernetes/pkg/kubelet/container)
 
+%if 0%{fedora}
 Provides: golang(%{import_path}/cmd/%{name}/docker) = %{epoch}:%{version}-%{release}
 Provides: golang(%{import_path}/cmd/%{name}/formats) = %{epoch}:%{version}-%{release}
 Provides: golang(%{import_path}/libkpod) = %{epoch}:%{version}-%{release}
@@ -359,6 +368,20 @@ Provides: golang(%{import_path}/pkg/chrootuser) = %{epoch}:%{version}-%{release}
 Provides: golang(%{import_path}/pkg/registrar) = %{epoch}:%{version}-%{release}
 Provides: golang(%{import_path}/pkg/storage) = %{epoch}:%{version}-%{release}
 Provides: golang(%{import_path}/utils) = %{epoch}:%{version}-%{release}
+%else
+Provides: golang(%{import_path}/cmd/%{name}/docker) = %{version}-%{release}
+Provides: golang(%{import_path}/cmd/%{name}/formats) = %{version}-%{release}
+Provides: golang(%{import_path}/libkpod) = %{version}-%{release}
+Provides: golang(%{import_path}/libpod) = %{version}-%{release}
+Provides: golang(%{import_path}/libpod/common) = %{version}-%{release}
+Provides: golang(%{import_path}/libpod/driver) = %{version}-%{release}
+Provides: golang(%{import_path}/libpod/layers) = %{version}-%{release}
+Provides: golang(%{import_path}/pkg/annotations) = %{version}-%{release}
+Provides: golang(%{import_path}/pkg/chrootuser) = %{version}-%{release}
+Provides: golang(%{import_path}/pkg/registrar) = %{version}-%{release}
+Provides: golang(%{import_path}/pkg/storage) = %{version}-%{release}
+Provides: golang(%{import_path}/utils) = %{version}-%{release}
+%endif
 
 %description -n libpod-devel
 %{summary}
@@ -377,7 +400,11 @@ Summary: Unit tests for %{name} package
 %endif
 
 # test subpackage tests code from devel subpackage
+%if 0%{fedora}
 Requires: %{name}-devel = %{epoch}:%{version}-%{release}
+%else
+Requires: %{name}-devel = %{version}-%{release}
+%endif
 
 %if 0%{?with_check} && ! 0%{?with_bundled}
 BuildRequires: golang(github.com/stretchr/testify/assert)
@@ -398,7 +425,11 @@ providing packages with %{import_path} prefix.
 %package tests
 Summary: Tests for %{name}
 
+%if 0%{fedora}
 Requires: %{name} = %{epoch}:%{version}-%{release}
+%else
+Requires: %{name} = %{version}-%{release}
+%endif
 Requires: bats
 Requires: jq
 
