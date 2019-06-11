@@ -45,7 +45,7 @@ Name: podman
 Epoch: 2
 %endif # fedora
 Version: 1.4.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Manage Pods, Containers and Container Images
 License: ASL 2.0
 URL: https://%{name}.io/
@@ -625,6 +625,9 @@ exit 0
 %{_datadir}/%{name}/test
 
 %changelog
+* Tue Jun 11 2019 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 2:1.4.0-3
+- fixed epoch usage in non Fedora systems
+
 * Tue Jun 11 2019 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 2:1.4.0-2
 - fixed EL7 dependency problems
 
