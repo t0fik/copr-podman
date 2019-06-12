@@ -355,7 +355,7 @@ Requires: golang(k8s.io/apimachinery/pkg/util/wait)
 Requires: golang(k8s.io/client-go/tools/remotecommand)
 Requires: golang(k8s.io/kubernetes/pkg/kubelet/container)
 
-%if 0%{fedora}
+%if 0%{?fedora}
 Provides: golang(%{import_path}/cmd/%{name}/docker) = %{epoch}:%{version}-%{release}
 Provides: golang(%{import_path}/cmd/%{name}/formats) = %{epoch}:%{version}-%{release}
 Provides: golang(%{import_path}/libkpod) = %{epoch}:%{version}-%{release}
@@ -400,7 +400,7 @@ Summary: Unit tests for %{name} package
 %endif
 
 # test subpackage tests code from devel subpackage
-%if 0%{fedora}
+%if 0%{?fedora}
 Requires: %{name}-devel = %{epoch}:%{version}-%{release}
 %else
 Requires: %{name}-devel = %{version}-%{release}
@@ -425,7 +425,7 @@ providing packages with %{import_path} prefix.
 %package tests
 Summary: Tests for %{name}
 
-%if 0%{fedora}
+%if 0%{?fedora}
 Requires: %{name} = %{epoch}:%{version}-%{release}
 %else
 Requires: %{name} = %{version}-%{release}
